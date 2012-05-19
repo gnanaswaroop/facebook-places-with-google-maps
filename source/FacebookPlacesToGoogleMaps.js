@@ -4,20 +4,23 @@
 // @description    Facebook places by default has Bing maps, but if you wish to have Google Maps instead. This is the right script for you
 // @include        http://www.facebook.com/pages/*
 // @include        http://facebook.com/pages/*
+// @include        https://www.facebook.com/pages/*
+// @include        https://facebook.com/pages/* 		
 // ==/UserScript==
 
 function fetchLatitudeAndLongitude () {
     try {
-       
-        GM_log('Start looking for the pagelet_place_info');
+	
+	    GM_log('Start looking for the pagelet_place_info');
         // A pain to drill down to find the right element - you need to know the id or name of the element.
         // This will be replaced with JQuery later - don't worry - the logic won't change
         var divPagelet_Place_info = document.getElementById('pagelet_info');
         GM_log('Found pagelet_place_info');
        
-        // 0/1/1/0/1
-        bingImgReference = divPagelet_Place_info.childNodes[0].childNodes[1].childNodes[1].childNodes[0].childNodes[1];      
-        GM_log("Found Bing Image = " + bingImgReference);
+		// 0/1/1/0/0		
+        bingImgReference = divPagelet_Place_info.childNodes[0].childNodes[1].childNodes[1].childNodes[0].childNodes[0];      
+		
+		GM_log("Found Bing Image = " + bingImgReference.outerHTML);
        
         var bingMapsImageSrc = bingImgReference.src;
         GM_log('bingMapsImageSrc = ' + bingMapsImageSrc);
